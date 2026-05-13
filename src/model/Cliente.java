@@ -1,28 +1,29 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package model;
 
 import java.util.List;
 /**
  *
- * @author Administrator
+ * @author Ander
  */
 public class Cliente {
     
+    // Atributos
     private int clienteId;
     private String nombre; 
-    private List<Producto> carroCompras; // Cambiado a Lista de Productos
+    private List<Producto> carroCompras; 
     
+    // Constructor vacío 
     public Cliente () {}
 
+    // Constructor con todos los atributos 
     public Cliente(int clienteId, String nombre, List<Producto> carroCompras) {
         this.clienteId = clienteId;
         this.nombre = nombre;
         this.carroCompras = carroCompras;
     }
 
+    // Getters y Setters
     public int getClienteId() {
         return clienteId;
     }
@@ -47,9 +48,12 @@ public class Cliente {
         this.carroCompras = carroCompras;
     }
 
+    // Método toString
     @Override
     public String toString() {
-        return "Cliente{" + "clienteId=" + clienteId + ", nombre=" + nombre + ", carroCompras=" + carroCompras + '}';
+        return "Cliente{" + "clienteId=" + clienteId + 
+                ", nombre=" + nombre + ", carroCompras=" +
+                carroCompras + '}';
     }
      
 }

@@ -1,91 +1,53 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package model;
 
-public class Cajera extends Thread { 
+import javax.swing.JTextArea;
+
+public class Cajera extends Thread {
     
-    private int cajeraId;
-    private String nombre; 
+    // Atributos
+    private String nombre;
     private Cliente cliente;
-    private long tiempoinicial;
-    
+    private JTextArea areaInforme;
+
+    // Constructor vacío
     public Cajera () {}
-
-    public Cajera(int cajeraId, String nombre, Cliente cliente, long tiempoinicial) {
-        this.cajeraId = cajeraId;
+    
+    // Constructor con todos los atributos 
+    public Cajera(String nombre, Cliente cliente, JTextArea areaInforme) {
         this.nombre = nombre;
         this.cliente = cliente;
-        this.tiempoinicial = tiempoinicial;
+        this.areaInforme = areaInforme;
     }
 
-    public int getCajeraId() {
-        return cajeraId;
-    }
-
-    public void setCajeraId(int cajeraId) {
-        this.cajeraId = cajeraId;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public long getTiempoinicial() {
-        return tiempoinicial;
-    }
-
-    public void setTiempoinicial(long tiempoinicial) {
-        this.tiempoinicial = tiempoinicial;
-    }
-
-    @Override
-    public String toString() {
-        return "Cajera{" + "cajeraId=" + cajeraId + ", nombre=" + nombre + ", cliente=" + cliente.getNombre() + ", tiempoinicial=" + tiempoinicial + '}';
-    }
-    
-    
+    // Método toString
     @Override
     public void run() {
-        System.out.println("La cajera " + this.nombre + " COMIENZA a procesar la compra del cliente " 
-                + this.cliente.getNombre() + " en el tiempo: 0 seg");
+        areaInforme.append("" + nombre + " comienza atención de: " +
+                cliente.getNombre() + "\n--------------------------------------------------\n");
         
-        int tiempoTotalCompra = 0;
-        
-        if (this.cliente.getCarroCompras() != null) {
-            for (int i = 0; i < this.cliente.getCarroCompras().size(); i++) {
-                Producto producto = this.cliente.getCarroCompras().get(i);
-                tiempoTotalCompra += producto.getTiempoPro();
-                this.esperarXSegundos(producto.getTiempoPro());
-                System.out.println("Procesado el producto " + producto.getNombre() 
-                        + " del cliente " + this.cliente.getNombre() + " -> Tiempo: " 
-                        + producto.getTiempoPro() + " seg");
+        int sumaTotal = 0;
+
+        for (Producto p : cliente.getCarroCompras()) {
+            try {
+                // Tiempo aleatorio desde el procducto 
+                Thread.sleep(p.getTiempoPro() * 1000); 
+                sumaTotal += p.getTiempoPro();
+                
+                // Salida de la cajera y el cliente en proceso de cobro 
+                areaInforme.append("[" + nombre + "] Cliente: " + cliente.getNombre() + 
+                   " | " + p.getNombre() + " | Tiempo de proceso: " + p.getTiempoPro() + "s\n");
+                
+                areaInforme.setCaretPosition(areaInforme.getDocument().getLength());
+                
+            } catch (InterruptedException e) {
+                areaInforme.append("Error en caja " + nombre + "\n");
             }
         }
 
-        System.out.println("La cajera " + this.nombre + " HA TERMINADO de procesar al cliente " 
-                + this.cliente.getNombre() + " en el tiempo total de: " + tiempoTotalCompra + " seg");
-    }
-
-    
-    private void esperarXSegundos(int segundos) {
-        try {
-            Thread.sleep(segundos * 1000L);
-        } catch (InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
+        // Salida del total del cliente de tiempo en caja 
+        areaInforme.append("--------------------------------------------------\n");
+        areaInforme.append("✅ " + nombre + " FINALIZÓ con " + cliente.getNombre() 
+                           + ". Total: " + sumaTotal + " seg.\n\n");
     }
 }

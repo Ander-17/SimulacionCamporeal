@@ -1,27 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package model;
 
 /**
  *
- * @author Administrator
+ * @author Ander
  */
 public class Producto {
     
+    // Atributos
     private int productoId;
     private String nombre;
     private int tiempoPro;
     
+    // Constructor vacío 
     public Producto () {}
 
+    // Constructor con todos los atributos 
     public Producto(int productoId, String nombre, int tiempoPro) {
         this.productoId = productoId;
         this.nombre = nombre;
         this.tiempoPro = tiempoPro;
     }
 
+    // Getters y Setters
     public int getProductoId() {
         return productoId;
     }
@@ -46,9 +47,12 @@ public class Producto {
         this.tiempoPro = tiempoPro;
     }
 
+    // Método toString
     @Override
     public String toString() {
-        return "Producto{" + "productoId=" + productoId + ", nombre=" + nombre + ", tiempoPro=" + tiempoPro + '}';
+        return "Producto{" + "productoId=" + productoId +
+                ", nombre=" + nombre + ", tiempoPro=" +
+                tiempoPro + '}';
     }
     
     
