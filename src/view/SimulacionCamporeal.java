@@ -32,7 +32,7 @@ public class SimulacionCamporeal extends JFrame {
         areaInforme = new JTextArea();
         areaInforme.setEditable(false);
         areaInforme.setBackground(Color.BLACK);
-        areaInforme.setForeground(new Color(0, 255, 200)); // Cian brillante
+        areaInforme.setForeground(new Color(0, 255, 200));
         areaInforme.setFont(new Font("Consolas", Font.BOLD, 14));
         
         JScrollPane scroll = new JScrollPane(areaInforme);
