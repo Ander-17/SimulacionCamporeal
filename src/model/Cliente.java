@@ -13,8 +13,6 @@ public class Cliente {
     private String nombre; 
     private List<Producto> carroCompras; 
     
-    // Constructor vacío 
-    public Cliente () {}
 
     // Constructor con todos los atributos 
     public Cliente(int clienteId, String nombre, List<Producto> carroCompras) {

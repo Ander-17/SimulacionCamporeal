@@ -10,8 +10,7 @@ public class Cajera extends Thread {
     private Cliente cliente;
     private JTextArea areaInforme;
 
-    // Constructor vacío
-    public Cajera () {}
+  
     
     // Constructor con todos los atributos 
     public Cajera(String nombre, Cliente cliente, JTextArea areaInforme) {

@@ -11,9 +11,6 @@ public class Producto {
     private int productoId;
     private String nombre;
     private int tiempoPro;
-    
-    // Constructor vacío 
-    public Producto () {}
 
     // Constructor con todos los atributos 
     public Producto(int productoId, String nombre, int tiempoPro) {
